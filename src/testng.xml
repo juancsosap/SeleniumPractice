@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Test Suite Selenium" verbose="1" >
+    <test name="Automation Practice Tests" >
+        <classes>
+            <class name="tests.automationpractice.HomePageTests" />
+            <class name="tests.automationpractice.SigninPageTests" />
+            <class name="tests.automationpractice.RegisterPageTests" />
+        </classes>
+    </test>
+
+    <test name="Google Tests">
+        <classes>
+            <class name="tests.google.HomePageTests"/>
+        </classes>
+    </test>
+</suite>
