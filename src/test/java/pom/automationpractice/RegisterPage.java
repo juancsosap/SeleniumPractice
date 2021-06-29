@@ -44,7 +44,7 @@ public class RegisterPage extends Page {
     public static final By inputAlias = By.xpath("//input[@id='alias']");
 
     public static final By buttonRegister = By.xpath("//button[@id='submitAccount']");
-    public static final By errorMessages = By.xpath("//div[@id='center_column']/div//li");
+    public static final By errorMessages = By.xpath("//div[@id='center_column']/div[contains(@class, 'alert')]//li");
 
     public void selectBirth(int miliseconds, int day, int month, int year) {
         browser.selectByValue(RegisterPage.selectBirthDay, miliseconds, day + "");
@@ -63,8 +63,8 @@ public class RegisterPage extends Page {
 
         public Data() {
             title = "Mr"; firstname = ""; lastname = ""; password = "";
-            dayBirth = 1; monthBirth = 1; yearBirth = 1900; company = ""; address = ""; city = "";
-            state = ""; postCode = "00000"; country = "United States"; additional = "";
+            dayBirth = 1; monthBirth = 1; yearBirth = 2020; company = ""; address = ""; city = "";
+            state = "-"; postCode = "00000"; country = "United States"; additional = "";
             homePhone = ""; mobilePhone = ""; alias = "";
         }
 

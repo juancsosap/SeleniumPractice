@@ -19,10 +19,8 @@ public class HomePage extends Page {
     public static final By buttonSearch = By.xpath("//input[@name='btnK']");
 
     public void searchText(int miliseconds, String text) {
-        browser.highlight(HomePage.inputQuery, miliseconds);
-        browser.getElement(HomePage.inputQuery).sendKeys(text);
-        browser.highlight(HomePage.buttonSearch, miliseconds);
-        browser.getElement(HomePage.buttonSearch).submit();
+        browser.inputText(HomePage.inputQuery, miliseconds, text);
+        browser.click(HomePage.buttonSearch, miliseconds);
         browser.wait(miliseconds);
     }
 

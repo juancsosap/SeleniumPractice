@@ -1,9 +1,7 @@
 package utils.web;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -14,10 +12,19 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pom.automationpractice.RegisterPage;
+import utils.reports.BaseReporter;
+import utils.reports.ExtentReporter;
+import utils.reports.Reporter;
+import utils.reports.LogStatus;
+import utils.tests.PageTests;
+//import org.testng.Reporter;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import org.openqa.selenium.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class Browser {
@@ -25,58 +32,51 @@ public class Browser {
     protected BrowserSelector selector;
     protected Object options;
 
-    public Browser(BrowserSelector selector, String driverPath, int waitSeconds) {
+    public Browser(BrowserSelector selector, String driverPath, int waitSeconds, boolean privateMode) {
         this.selector = selector;
         setPath(driverPath);
-        setOptions();
+        setOptions(privateMode);
         setDriver();
-
-        driver.manage().timeouts().implicitlyWait(waitSeconds, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(waitSeconds, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(waitSeconds, TimeUnit.SECONDS);
+        setImplicitWait(waitSeconds);
 
         driver.manage().window().maximize();
     }
+    public Browser(BrowserSelector selector, String driverPath) {
+        this(selector, driverPath, 10, false);
+    }
+    public Browser(BrowserSelector selector, String driverPath, int waitSeconds) {
+        this(selector, driverPath, waitSeconds, false);
+    }
 
-    public void setOptions() {
-        switch(selector) {
+    public void setOptions(boolean privateMode) {
+        switch (selector) {
             case CHROME:
                 options = new ChromeOptions();
-                ((ChromeOptions) options).addArguments("--incognito");
-                break;
-            case FIREFOX:
-                //options = new FirefoxProfile();
-                //((FirefoxProfile) options).setPreference("browser.privatebrowsing.autostart", true);
+                if(privateMode) ((ChromeOptions) options).addArguments("--incognito");
                 break;
             case EDGE:
                 options = new EdgeOptions();
-                ((EdgeOptions) options).setCapability("InPrivate", true);
-                break;
-            case IE:
-                //options = DesiredCapabilities.internetExplorer();
-                //((DesiredCapabilities) options).setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, true);
-                //((DesiredCapabilities) options).setCapability(InternetExplorerDriver.IE_SWITCHES, "-private");
-                break;
-            case SAFARI:
-                break;
-            case OPERA:
-                //DesiredCapabilities capabilities = DesiredCapabilities.operaBlink();
-                //options = new OperaOptions();
-                //((DesiredCapabilities) options).setCapability("private", true);
-                //capabilities.setCapability(OperaOptions.CAPABILITY, options);
+                if(privateMode) ((EdgeOptions) options).setCapability("InPrivate", true);
                 break;
         }
     }
 
     public void setDriver() {
-        switch(selector) {
-            case CHROME: driver = new ChromeDriver((ChromeOptions) options); break;
-            case FIREFOX: driver = new FirefoxDriver(); break;
-            case EDGE: driver = new EdgeDriver((EdgeOptions) options); break;
-            case IE: driver = new InternetExplorerDriver(); break;
-            case SAFARI: driver = new SafariDriver(); break;
-            case OPERA: driver = new OperaDriver(); break;
-        }
+        logMessage(LogStatus.INFO, "Opening " + selector + " Browser");
+        driver = switch(selector) {
+            case CHROME: yield new ChromeDriver((ChromeOptions) options);
+            case FIREFOX: yield new FirefoxDriver();
+            case EDGE: yield new EdgeDriver((EdgeOptions) options);
+            case IE: yield new InternetExplorerDriver();
+            case SAFARI: yield new SafariDriver();
+            case OPERA: yield new OperaDriver();
+        };
+    }
+
+    private void setImplicitWait(int waitSeconds) {
+        driver.manage().timeouts().implicitlyWait(waitSeconds, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(waitSeconds, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(waitSeconds, TimeUnit.SECONDS);
     }
 
     public WebDriver getDriver() {
@@ -84,12 +84,13 @@ public class Browser {
     }
 
     public void setPath(String driverPath) {
-        switch (selector) {
-            case CHROME: System.setProperty("webdriver.chrome.driver", driverPath); break;
-            case FIREFOX: System.setProperty("webdriver.gecko.driver", driverPath); break;
-            case EDGE: System.setProperty("webdriver.edge.driver", driverPath); break;
-            case IE: System.setProperty("webdriver.ie.driver", driverPath); break;
-        }
+        System.setProperty(switch (selector) {
+            case CHROME: yield "webdriver.chrome.driver";
+            case FIREFOX: yield "webdriver.gecko.driver";
+            case EDGE: yield "webdriver.edge.driver";
+            case IE: yield "webdriver.ie.driver";
+            default: yield "";
+        }, driverPath);
     }
 
     public void get(String url) {
@@ -98,7 +99,7 @@ public class Browser {
 
     public void wait(int miliseconds) {
         try { if(miliseconds > 0) Thread.sleep(miliseconds); }
-        catch (InterruptedException e) {}
+        catch (InterruptedException e) { e.printStackTrace(); }
     }
 
     public void waitUntilElement(By locator, int miliseconds) {
@@ -112,60 +113,150 @@ public class Browser {
     }
 
     public Object executeScript(By locator, String script) {
+        return executeScript(getElement(locator), script);
+    }
+    public Object executeScript(WebElement element, String script) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        return jsExecutor.executeScript(script, getElement(locator));
+        return jsExecutor.executeScript(script, element);
     }
 
-    public void highlight(By locator, int miliseconds) {
-        String cssBorder = getElement(locator).getCssValue("border");
-        setStyle(locator, "border", "2px solid red");
-        wait(miliseconds);
-        setStyle(locator, "border", cssBorder);
+    public WebElement highlight(By locator, int miliseconds) {
+        return highlight(getElement(locator), miliseconds);
+    }
+    public WebElement highlight(WebElement element, int miliseconds) {
+        if(element != null) {
+            String cssBorder = element.getCssValue("border");
+            setStyle(element, "border", "2px solid red");
+            wait(miliseconds);
+            setStyle(element, "border", cssBorder);
+        }
+        return element;
     }
 
     public void setAttribute(By locator, String attribute, String value) {
-        String script = "arguments[0].setAttribute('" + attribute + "', '" + value + "')";
-        executeScript(locator, script);
+        setAttribute(getElement(locator), attribute, value);
+    }
+    public void setAttribute(WebElement element, String attribute, String value) {
+        if(element != null) {
+            String script = "arguments[0].setAttribute('" + attribute + "', '" + value + "')";
+            executeScript(element, script);
+        }
     }
 
     public void setStyle(By locator, String property, String value) {
-        String script = "arguments[0].style." + property + " = '" + value + "'";
-        executeScript(locator, script);
+        setStyle(getElement(locator), property, value);
+    }
+    public void setStyle(WebElement element, String property, String value) {
+        if(element != null) {
+            String script = "arguments[0].style." + property + " = '" + value + "'";
+            executeScript(element, script);
+        }
     }
 
     public WebElement getElement(By locator) {
-        WebElement element = driver.findElement(locator);
-        return element;
+        try {
+            WebElement element = driver.findElement(locator);
+            PageTests.printMessage(LogStatus.INFO, "Element Found : " + locator);
+            return element;
+        } catch(NoSuchElementException e) {
+            PageTests.printMessage(LogStatus.WARNING, "Element not Found : " + locator);
+        }
+        return null;
     }
 
     public List<WebElement> getElements(By locator) {
         List<WebElement> elements = driver.findElements(locator);
+        if(elements.size() > 0) {
+            PageTests.printMessage(LogStatus.INFO, "Elements Found : " + locator);
+        } else {
+            PageTests.printMessage(LogStatus.WARNING, "Elements not Found : " + locator);
+        }
         return elements;
     }
 
     public Select getSelect(By locator) {
-        Select select = new Select(getElement(locator));
-        return select;
+        try {
+            WebElement element = driver.findElement(locator);
+            return getSelect(element, locator);
+        } catch(NoSuchElementException e) {
+            PageTests.printMessage(LogStatus.WARNING, "Element not Found : " + locator);
+        }
+        return null;
+    }
+    public Select getSelect(WebElement element, By locator) {
+        try {
+            if(element != null) {
+                Select select = new Select(element);
+                PageTests.printMessage(LogStatus.INFO, "Select Found : " + locator);
+                return select;
+            } else {
+                PageTests.printMessage(LogStatus.WARNING, "Select not Found : " + locator);
+            }
+        } catch(UnexpectedTagNameException e) {
+            PageTests.printMessage(LogStatus.WARNING, "Element is no a Select : " + locator);
+        }
+        return null;
     }
 
     public void inputText(By locator, int miliseconds, String value) {
-        highlight(locator, miliseconds);
-        getElement(locator).sendKeys(value);
+        WebElement element = getElement(locator);
+        if(isActive(element)) {
+            PageTests.printMessage(LogStatus.INFO, "Input Text : " + locator + " | '" + value + "'");
+            highlight(element, miliseconds).sendKeys(value);
+        } else {
+            PageTests.printMessage(LogStatus.WARNING, "Couldn't be Input Text : " + locator + " | '" + value + "'");
+        }
     }
 
     public void click(By locator, int miliseconds) {
-        highlight(locator, miliseconds);
-        getElement(locator).click();
+        WebElement element = getElement(locator);
+        if(isActive(element)) {
+            PageTests.printMessage(LogStatus.INFO, "Click : " + locator);
+            highlight(element, miliseconds).click();
+        } else {
+            PageTests.printMessage(LogStatus.WARNING, "Couldn't be Clicked : " + locator);
+        }
     }
 
     public void selectByValue(By locator, int miliseconds, String value) {
-        highlight(locator, miliseconds);
-        getSelect(RegisterPage.selectBirthDay).selectByValue(value);
+        WebElement element = getElement(locator);
+        if(isActive(element)) {
+            PageTests.printMessage(LogStatus.INFO, "Select by Value : " + locator + " | '" + value + "'");
+            highlight(element, miliseconds);
+            getSelect(element, locator).selectByValue(value);
+        } else {
+            PageTests.printMessage(LogStatus.WARNING, "Couldn't be selected by Value : " + locator + " | '" + value + "'");
+        }
     }
 
     public void selectByVisibleText(By locator, int miliseconds, String value) {
-        highlight(locator, miliseconds);
-        getSelect(RegisterPage.selectBirthDay).selectByVisibleText(value);
+        WebElement element = getElement(locator);
+        if(isActive(element)) {
+            PageTests.printMessage(LogStatus.INFO, "Select by Visible Text : " + locator + " | '" + value + "'");
+            highlight(element, miliseconds);
+            getSelect(element, locator).selectByVisibleText(value);
+        } else {
+            PageTests.printMessage(LogStatus.WARNING, "Couldn't be selected by Visible Text : " + locator + " | '" + value + "'");
+        }
+    }
+
+    public void logMessage(LogStatus status, String message) {
+        System.out.println(status + " : " + message);
+    }
+
+    public boolean isActive(By locator) {
+        return isActive(getElement(locator));
+    }
+    public boolean isActive(WebElement element) {
+        if(element != null) return element.isEnabled();
+        return false;
+    }
+
+    public void takeSnapShot(String fileWithPath) throws IOException {
+        TakesScreenshot scrShot = (TakesScreenshot) driver;
+        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+        File DstFile = new File(fileWithPath);
+        FileUtils.copyFile(SrcFile, DstFile);
     }
 
     public void close() {

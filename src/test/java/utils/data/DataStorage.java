@@ -18,9 +18,7 @@ public class DataStorage {
         return get(index, "");
     }
 
-    public boolean isEmpty() {
-        return data == null || (data.size() == 0);
-    }
+    public boolean isEmpty() { return data == null || (data.size() == 0); }
 
     public int getInt(int index) {
         return Integer.parseInt(get(index));

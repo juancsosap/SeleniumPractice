@@ -39,11 +39,9 @@ public class DataDriven {
         for(Row row : sheet) {
             for(Cell cell : row) {
                 if(cell.getColumnIndex() == 0) {
-                    if(cell.toString().equalsIgnoreCase(className)) continue;
-                    else break;
+                    if(!cell.toString().equalsIgnoreCase(className)) break;
                 } else if(cell.getColumnIndex() == 1) {
-                    if(cell.toString().equalsIgnoreCase(tag)) continue;
-                    else break;
+                    if(!cell.toString().equalsIgnoreCase(tag)) break;
                 } else {
                     data.add(cell + "");
                 }

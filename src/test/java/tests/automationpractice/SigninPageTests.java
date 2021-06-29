@@ -24,23 +24,23 @@ public class SigninPageTests extends PageTests<SigninPage> {
     public void createAccountWithoutEmail() {
         page.createAccount(3000, "");
 
-        asserter.assertListSize(SigninPage.errorRegisterMessages, 0, "No error generated with empty email");
+        asserter.assertListSize(SigninPage.errorRegisterMessages, 1, "No error generated with empty email");
         asserter.assertListContains(SigninPage.errorRegisterMessages, "Invalid email address.", "Error no present with empty email");
     }
 
     @Test
     public void createAccountWithWrongEmail() {
-        page.createAccount(3000, data.get(1));
+        page.createAccount(wait, data.get(1));
 
-        asserter.assertListSize(SigninPage.errorRegisterMessages, 0, "No error generated with wrong email");
+        asserter.assertListSize(SigninPage.errorRegisterMessages, 1, "No error generated with wrong email");
         asserter.assertListContains(SigninPage.errorRegisterMessages, "Invalid email address.", "Error no present with wrong email");
     }
 
     @Test
     public void createAccountWithRightEmail() {
-        page.createAccount(3000, data.get(1));
+        page.createAccount(wait, data.get(1));
 
-        asserter.assertText(RegisterPage.textHeading, "Authentication", "Register Page not displayed", 3000);
+        asserter.assertText(RegisterPage.textHeading, "Authentication", "Register Page not displayed", wait);
     }
 
 }
