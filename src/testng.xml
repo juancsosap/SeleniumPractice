@@ -2,7 +2,7 @@
 
 <suite name="Test Suite Selenium" verbose="1" >
 
-    <test name="Automation Practice Tests" preserve-order="true">
+    <test name="Automation Practice Tests">
         <classes>
             <class name="tests.automationpractice.HomePageTests" />
             <class name="tests.automationpractice.SigninPageTests" />
@@ -10,7 +10,7 @@
         </classes>
     </test>
 
-    <test name="Google Tests" preserve-order="true">
+    <test name="Google Tests">
         <classes>
             <class name="tests.google.HomePageTests"/>
         </classes>

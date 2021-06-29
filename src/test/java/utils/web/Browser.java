@@ -23,6 +23,7 @@ import utils.tests.PageTests;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
@@ -49,27 +50,28 @@ public class Browser {
     }
 
     public void setOptions(boolean privateMode) {
-        switch (selector) {
-            case CHROME:
-                options = new ChromeOptions();
-                if(privateMode) ((ChromeOptions) options).addArguments("--incognito");
-                break;
-            case EDGE:
-                options = new EdgeOptions();
-                if(privateMode) ((EdgeOptions) options).setCapability("InPrivate", true);
-                break;
+        options = switch (selector) {
+            case CHROME -> new ChromeOptions();
+            case EDGE -> new EdgeOptions();
+            default -> null;
+        };
+        if(privateMode) {
+            switch(selector) {
+                case CHROME: ((ChromeOptions) options).addArguments("--incognito"); break;
+                case EDGE: ((EdgeOptions) options).setCapability("InPrivate", true); break;
+            }
         }
     }
 
     public void setDriver() {
         logMessage(LogStatus.INFO, "Opening " + selector + " Browser");
         driver = switch(selector) {
-            case CHROME: yield new ChromeDriver((ChromeOptions) options);
-            case FIREFOX: yield new FirefoxDriver();
-            case EDGE: yield new EdgeDriver((EdgeOptions) options);
-            case IE: yield new InternetExplorerDriver();
-            case SAFARI: yield new SafariDriver();
-            case OPERA: yield new OperaDriver();
+            case CHROME -> new ChromeDriver((ChromeOptions) options);
+            case FIREFOX -> new FirefoxDriver();
+            case EDGE -> new EdgeDriver((EdgeOptions) options);
+            case IE -> new InternetExplorerDriver();
+            case SAFARI -> new SafariDriver();
+            case OPERA -> new OperaDriver();
         };
     }
 
@@ -85,11 +87,11 @@ public class Browser {
 
     public void setPath(String driverPath) {
         System.setProperty(switch (selector) {
-            case CHROME: yield "webdriver.chrome.driver";
-            case FIREFOX: yield "webdriver.gecko.driver";
-            case EDGE: yield "webdriver.edge.driver";
-            case IE: yield "webdriver.ie.driver";
-            default: yield "";
+            case CHROME -> "webdriver.chrome.driver";
+            case FIREFOX -> "webdriver.gecko.driver";
+            case EDGE -> "webdriver.edge.driver";
+            case IE -> "webdriver.ie.driver";
+            default -> "";
         }, driverPath);
     }
 
@@ -252,11 +254,16 @@ public class Browser {
         return false;
     }
 
-    public void takeSnapShot(String fileWithPath) throws IOException {
-        TakesScreenshot scrShot = (TakesScreenshot) driver;
-        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-        File DstFile = new File(fileWithPath);
-        FileUtils.copyFile(SrcFile, DstFile);
+    public void takeSnapShot(String folderPath, String filePath) {
+        File dstFile = Path.of(folderPath, filePath).toFile();
+        try {
+            TakesScreenshot scrShot = (TakesScreenshot) driver;
+            File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(srcFile, dstFile);
+            PageTests.printMessage(LogStatus.INFO, "Snapshot taken : '" + dstFile + "'");
+        } catch(IOException e) {
+            PageTests.printMessage(LogStatus.WARNING, "Couldn't be taken the snapshoot : '" + dstFile + "'");
+        }
     }
 
     public void close() {
