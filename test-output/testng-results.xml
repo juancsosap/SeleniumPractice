@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-06-29T18:44:16Z" name="Test Suite Selenium" finished-at="2021-06-29T18:44:52Z" duration-ms="35916">
+    <groups>
+    </groups>
+    <test started-at="2021-06-29T18:44:16Z" name="Google Tests" finished-at="2021-06-29T18:44:52Z" duration-ms="35916">
+      <class name="tests.google.HomePageTests">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:15Z" name="beforeSuite" finished-at="2021-06-29T18:44:16Z" duration-ms="721" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuite -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:16Z" name="beforeClass" finished-at="2021-06-29T18:44:31Z" duration-ms="15299" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="preparePage()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:31Z" name="preparePage" finished-at="2021-06-29T18:44:31Z" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preparePage -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:31Z" name="beforeMethod" finished-at="2021-06-29T18:44:39Z" duration-ms="7784" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.google.HomePageTests.buttonSearchPresent()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="buttonSearchPresent()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:39Z" name="buttonSearchPresent" finished-at="2021-06-29T18:44:40Z" duration-ms="1224" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- buttonSearchPresent -->
+        <test-method is-config="true" signature="afterMethod(java.lang.reflect.Method)[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:40Z" name="afterMethod" finished-at="2021-06-29T18:44:41Z" duration-ms="653" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.google.HomePageTests.buttonSearchPresent()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:41Z" name="beforeMethod" finished-at="2021-06-29T18:44:43Z" duration-ms="1549" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.google.HomePageTests.completeSearchSuccess()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="completeSearchSuccess()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:43Z" name="completeSearchSuccess" finished-at="2021-06-29T18:44:49Z" duration-ms="5910" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- completeSearchSuccess -->
+        <test-method is-config="true" signature="afterMethod(java.lang.reflect.Method)[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:49Z" name="afterMethod" finished-at="2021-06-29T18:44:49Z" duration-ms="153" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.google.HomePageTests.completeSearchSuccess()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:49Z" name="beforeMethod" finished-at="2021-06-29T18:44:50Z" duration-ms="1405" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.google.HomePageTests.inputSearchPresent()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="inputSearchPresent()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:50Z" name="inputSearchPresent" finished-at="2021-06-29T18:44:51Z" duration-ms="1103" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- inputSearchPresent -->
+        <test-method is-config="true" signature="afterMethod(java.lang.reflect.Method)[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:51Z" name="afterMethod" finished-at="2021-06-29T18:44:51Z" duration-ms="128" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.google.HomePageTests.inputSearchPresent()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:51Z" name="afterClass" finished-at="2021-06-29T18:44:52Z" duration-ms="585" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.google.HomePageTests@4229bb3f]" started-at="2021-06-29T18:44:53Z" name="afterSuite" finished-at="2021-06-29T18:44:56Z" duration-ms="3001" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- tests.google.HomePageTests -->
+    </test> <!-- Google Tests -->
+  </suite> <!-- Test Suite Selenium -->
+</testng-results>
