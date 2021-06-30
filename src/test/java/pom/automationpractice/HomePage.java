@@ -28,4 +28,9 @@ public class HomePage extends Page {
         browser.wait(miliseconds);
     }
 
+    public void clickSigninButton(int miliseconds) {
+        browser.click(HomePage.buttonSignin, miliseconds);
+        browser.wait(miliseconds);
+    }
+
 }

@@ -14,8 +14,7 @@ public class RegisterPage extends Page {
     public void go(int miliseconds) {
         SigninPage page = new SigninPage(browser);
         page.go(miliseconds);
-        String email = "prueba" + RandomGen.getDigits(5) + "@prueba.prueba";
-        page.createAccount(email, miliseconds);
+        page.createAccount(getRandomEmail(), miliseconds);
     }
 
     public static final By textHeading = By.xpath("//span[@class='navigation_page']");
@@ -45,6 +44,10 @@ public class RegisterPage extends Page {
 
     public static final By buttonRegister = By.xpath("//button[@id='submitAccount']");
     public static final By errorMessages = By.xpath("//div[@id='center_column']/div[contains(@class, 'alert')]//li");
+
+    private String getRandomEmail() {
+        return "prueba" + RandomGen.getDigits(5) + "@prueba.prueba";
+    }
 
     public void selectBirth(int day, int month, int year, int miliseconds) {
         browser.selectByValue(RegisterPage.selectBirthDay, day + "", miliseconds);

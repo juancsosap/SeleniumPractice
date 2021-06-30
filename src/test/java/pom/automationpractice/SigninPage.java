@@ -13,7 +13,7 @@ public class SigninPage extends Page {
     public void go(int miliseconds) {
         HomePage page = new HomePage(browser);
         page.go(miliseconds);
-        browser.click(HomePage.buttonSignin, miliseconds);
+        page.clickSigninButton(miliseconds);
     }
 
     public static final By textHeading = By.xpath("//span[@class='navigation_page']");
