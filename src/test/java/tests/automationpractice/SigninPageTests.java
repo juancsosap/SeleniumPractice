@@ -22,7 +22,7 @@ public class SigninPageTests extends PageTests<SigninPage> {
 
     @Test
     public void createAccountWithoutEmail() {
-        page.createAccount(3000, "");
+        page.createAccount("", wait);
 
         asserter.assertListSize(SigninPage.errorRegisterMessages, 1, "No error generated with empty email");
         asserter.assertListContains(SigninPage.errorRegisterMessages, "Invalid email address.", "Error no present with empty email");
@@ -30,7 +30,7 @@ public class SigninPageTests extends PageTests<SigninPage> {
 
     @Test
     public void createAccountWithWrongEmail() {
-        page.createAccount(wait, data.get(1));
+        page.createAccount(data.get(1), wait);
 
         asserter.assertListSize(SigninPage.errorRegisterMessages, 1, "No error generated with wrong email");
         asserter.assertListContains(SigninPage.errorRegisterMessages, "Invalid email address.", "Error no present with wrong email");
@@ -38,7 +38,7 @@ public class SigninPageTests extends PageTests<SigninPage> {
 
     @Test
     public void createAccountWithRightEmail() {
-        page.createAccount(wait, data.get(1));
+        page.createAccount(data.get(1), wait);
 
         asserter.assertText(RegisterPage.textHeading, "Authentication", "Register Page not displayed", wait);
     }

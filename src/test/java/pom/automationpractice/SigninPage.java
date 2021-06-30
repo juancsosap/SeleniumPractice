@@ -28,8 +28,8 @@ public class SigninPage extends Page {
     public static final By buttonLogin = By.xpath("//button[@id='SubmitLogin']");
     public static final By errorLoginMessages = By.xpath("//div[@id='center_column']/div[contains(@class, 'alert')]//li");
 
-    public void createAccount(int miliseconds, String email) {
-        browser.inputText(SigninPage.inputEmailRegister, miliseconds, email);
+    public void createAccount(String email, int miliseconds) {
+        browser.inputText(SigninPage.inputEmailRegister, email, miliseconds);
         browser.click(SigninPage.buttonCreate, miliseconds);
         browser.wait(miliseconds);
     }

@@ -15,7 +15,7 @@ public class RegisterPage extends Page {
         SigninPage page = new SigninPage(browser);
         page.go(miliseconds);
         String email = "prueba" + RandomGen.getDigits(5) + "@prueba.prueba";
-        page.createAccount(miliseconds, email);
+        page.createAccount(email, miliseconds);
     }
 
     public static final By textHeading = By.xpath("//span[@class='navigation_page']");
@@ -46,13 +46,13 @@ public class RegisterPage extends Page {
     public static final By buttonRegister = By.xpath("//button[@id='submitAccount']");
     public static final By errorMessages = By.xpath("//div[@id='center_column']/div[contains(@class, 'alert')]//li");
 
-    public void selectBirth(int miliseconds, int day, int month, int year) {
-        browser.selectByValue(RegisterPage.selectBirthDay, miliseconds, day + "");
-        browser.selectByValue(RegisterPage.selectBirthMonth, miliseconds, month + "");
-        browser.selectByValue(RegisterPage.selectBirthYear, miliseconds, year + "");
+    public void selectBirth(int day, int month, int year, int miliseconds) {
+        browser.selectByValue(RegisterPage.selectBirthDay, day + "", miliseconds);
+        browser.selectByValue(RegisterPage.selectBirthMonth, month + "", miliseconds);
+        browser.selectByValue(RegisterPage.selectBirthYear, year + "", miliseconds);
     }
 
-    public void selectTitle(int miliseconds, String value) {
+    public void selectTitle(String value, int miliseconds) {
         if(value.equalsIgnoreCase("mr")) browser.click(RegisterPage.radioTitleMr, miliseconds);
         if(value.equalsIgnoreCase("mrs")) browser.click(RegisterPage.radioTitleMrs, miliseconds);
     }
@@ -114,21 +114,21 @@ public class RegisterPage extends Page {
         public Builder alias(String value) { data.alias = value; return this; }
 
         public void register(int miliseconds) {
-            page.selectTitle(miliseconds, data.title);
-            browser.inputText(RegisterPage.inputFirstname, miliseconds, data.firstname);
-            browser.inputText(RegisterPage.inputLastname, miliseconds, data.lastname);
-            browser.inputText(RegisterPage.inputPassword, miliseconds, data.password);
+            page.selectTitle(data.title, miliseconds);
+            browser.inputText(RegisterPage.inputFirstname, data.firstname, miliseconds);
+            browser.inputText(RegisterPage.inputLastname, data.lastname, miliseconds);
+            browser.inputText(RegisterPage.inputPassword, data.password, miliseconds);
             page.selectBirth(miliseconds, data.dayBirth, data.monthBirth, data.yearBirth);
-            browser.inputText(RegisterPage.inputCompany, miliseconds, data.company);
-            browser.inputText(RegisterPage.inputAddress, miliseconds, data.address);
-            browser.inputText(RegisterPage.inputCity, miliseconds, data.city);
-            browser.selectByVisibleText(RegisterPage.selectState, miliseconds, data.state);
-            browser.inputText(RegisterPage.inputPostCode, miliseconds, data.postCode);
-            browser.selectByVisibleText(RegisterPage.selectCountry, miliseconds, data.country);
-            browser.inputText(RegisterPage.inputAdditional, miliseconds, data.additional);
-            browser.inputText(RegisterPage.inputHomePhone, miliseconds, data.homePhone);
-            browser.inputText(RegisterPage.inputMobilePhone, miliseconds, data.mobilePhone);
-            browser.inputText(RegisterPage.inputAlias, miliseconds, data.alias);
+            browser.inputText(RegisterPage.inputCompany, data.company, miliseconds);
+            browser.inputText(RegisterPage.inputAddress, data.address, miliseconds);
+            browser.inputText(RegisterPage.inputCity, data.city, miliseconds);
+            browser.selectByVisibleText(RegisterPage.selectState, data.state, miliseconds);
+            browser.inputText(RegisterPage.inputPostCode, data.postCode, miliseconds);
+            browser.selectByVisibleText(RegisterPage.selectCountry, data.country, miliseconds);
+            browser.inputText(RegisterPage.inputAdditional, data.additional, miliseconds);
+            browser.inputText(RegisterPage.inputHomePhone, data.homePhone, miliseconds);
+            browser.inputText(RegisterPage.inputMobilePhone, data.mobilePhone, miliseconds);
+            browser.inputText(RegisterPage.inputAlias, data.alias, miliseconds);
 
             browser.click(RegisterPage.buttonRegister, miliseconds);
         }

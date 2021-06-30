@@ -22,8 +22,8 @@ public class HomePage extends Page {
 
     public static final By buttonLogout = By.xpath("//a[@class='logout']");
 
-    public void searchProduct(int miliseconds, String product) {
-        browser.inputText(HomePage.inputSearch, miliseconds, product);
+    public void searchProduct(String product, int miliseconds) {
+        browser.inputText(HomePage.inputSearch, product, miliseconds);
         browser.click(HomePage.buttonSearch, miliseconds);
         browser.wait(miliseconds);
     }

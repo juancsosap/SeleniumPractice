@@ -13,7 +13,7 @@ public class ResultPage extends Page {
     public void go(int miliseconds) {
         HomePage page = new HomePage(browser);
         page.go(miliseconds);
-        page.searchText(miliseconds, "test");
+        page.searchText("test", miliseconds);
     }
 
     public static final By results = By.xpath("//div[@id='rso']//div[@class='g']");

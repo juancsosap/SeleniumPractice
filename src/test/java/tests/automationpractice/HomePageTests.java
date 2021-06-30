@@ -30,7 +30,7 @@ public class HomePageTests extends PageTests<HomePage> {
 
     @Test
     public void searchSuccess() {
-        page.searchProduct(wait, data.get(1));
+        page.searchProduct(data.get(1), wait);
 
         asserter.assertText(ResultPage.textHeading, "Search", "Result Page not displayed", wait);
         asserter.assertListSize(ResultPage.produstResults, 1, "No Result displayed");

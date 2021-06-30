@@ -7,8 +7,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -50,15 +54,39 @@ public class Browser {
     }
 
     public void setOptions(boolean privateMode) {
-        options = switch (selector) {
-            case CHROME -> new ChromeOptions();
-            case EDGE -> new EdgeOptions();
-            default -> null;
-        };
-        if(privateMode) {
-            switch(selector) {
-                case CHROME: ((ChromeOptions) options).addArguments("--incognito"); break;
-                case EDGE: ((EdgeOptions) options).setCapability("InPrivate", true); break;
+        switch (selector) {
+            case CHROME -> {
+                options = new ChromeOptions();
+                if (privateMode) {
+                    ((ChromeOptions) options).addArguments("--incognito");
+                }
+            }
+            case FIREFOX -> {
+                options = new FirefoxOptions();
+                if (privateMode) {
+                    ((FirefoxOptions) options).addArguments("-private");
+                }
+            }
+            case EDGE -> {
+                options = new EdgeOptions();
+                if (privateMode) {
+                    ((EdgeOptions) options).setCapability("InPrivate", true);
+                }
+            }
+            case IE -> {
+                options = new InternetExplorerOptions();
+                if (privateMode) {
+                    ((InternetExplorerOptions) options).setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, true);
+                    ((InternetExplorerOptions) options).addCommandSwitches("-private");
+                }
+            }
+            case OPERA -> {
+                options = new OperaOptions();
+                if (privateMode) {
+                    DesiredCapabilities capabilities = DesiredCapabilities.operaBlink();
+                    ((OperaOptions) options).addArguments("private");
+                    capabilities.setCapability(OperaOptions.CAPABILITY, options);
+                }
             }
         }
     }
@@ -67,11 +95,11 @@ public class Browser {
         logMessage(LogStatus.INFO, "Opening " + selector + " Browser");
         driver = switch(selector) {
             case CHROME -> new ChromeDriver((ChromeOptions) options);
-            case FIREFOX -> new FirefoxDriver();
+            case FIREFOX -> new FirefoxDriver((FirefoxOptions) options);
             case EDGE -> new EdgeDriver((EdgeOptions) options);
-            case IE -> new InternetExplorerDriver();
+            case IE -> new InternetExplorerDriver((InternetExplorerOptions) options);
             case SAFARI -> new SafariDriver();
-            case OPERA -> new OperaDriver();
+            case OPERA -> new OperaDriver((OperaOptions) options);
         };
     }
 
@@ -200,7 +228,7 @@ public class Browser {
         return null;
     }
 
-    public void inputText(By locator, int miliseconds, String value) {
+    public void inputText(By locator, String value, int miliseconds) {
         WebElement element = getElement(locator);
         if(isActive(element)) {
             PageTests.printMessage(LogStatus.INFO, "Input Text : " + locator + " | '" + value + "'");
@@ -220,7 +248,7 @@ public class Browser {
         }
     }
 
-    public void selectByValue(By locator, int miliseconds, String value) {
+    public void selectByValue(By locator, String value, int miliseconds) {
         WebElement element = getElement(locator);
         if(isActive(element)) {
             PageTests.printMessage(LogStatus.INFO, "Select by Value : " + locator + " | '" + value + "'");
@@ -231,7 +259,7 @@ public class Browser {
         }
     }
 
-    public void selectByVisibleText(By locator, int miliseconds, String value) {
+    public void selectByVisibleText(By locator, String value, int miliseconds) {
         WebElement element = getElement(locator);
         if(isActive(element)) {
             PageTests.printMessage(LogStatus.INFO, "Select by Visible Text : " + locator + " | '" + value + "'");

@@ -18,8 +18,8 @@ public class HomePage extends Page {
     public static final By inputQuery = By.xpath("//input[@name='q']");
     public static final By buttonSearch = By.xpath("//input[@name='btnK']");
 
-    public void searchText(int miliseconds, String text) {
-        browser.inputText(HomePage.inputQuery, miliseconds, text);
+    public void searchText(String text, int miliseconds) {
+        browser.inputText(HomePage.inputQuery, text, miliseconds);
         browser.click(HomePage.buttonSearch, miliseconds);
         browser.wait(miliseconds);
     }

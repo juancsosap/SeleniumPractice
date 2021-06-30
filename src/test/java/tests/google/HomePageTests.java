@@ -25,7 +25,7 @@ public class HomePageTests extends PageTests<HomePage> {
 
     @Test
     public void completeSearchSuccess() {
-        page.searchText(wait, data.get(1));
+        page.searchText(data.get(1), wait);
         asserter.assertListSize(ResultPage.results, 1, "No Result Elements displayed");
     }
 
