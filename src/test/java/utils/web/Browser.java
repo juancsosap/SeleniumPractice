@@ -164,8 +164,10 @@ public class Browser {
     }
     public void setAttribute(WebElement element, String attribute, String value) {
         if(element != null) {
-            String script = "arguments[0].setAttribute('" + attribute + "', '" + value + "')";
-            executeScript(element, script);
+            if(attribute != null && value != null) {
+                String script = "arguments[0].setAttribute('" + attribute + "', '" + value + "')";
+                executeScript(element, script);
+            }
         }
     }
 
@@ -174,18 +176,22 @@ public class Browser {
     }
     public void setStyle(WebElement element, String property, String value) {
         if(element != null) {
-            String script = "arguments[0].style." + property + " = '" + value + "'";
-            executeScript(element, script);
+            if(property != null && value != null) {
+                String script = "arguments[0].style." + property + " = '" + value + "'";
+                executeScript(element, script);
+            }
         }
     }
 
     public WebElement getElement(By locator) {
         try {
             WebElement element = driver.findElement(locator);
-            PageTests.printMessage(LogStatus.INFO, "Element Found : " + locator);
+            String message = "Element Found : " + locator;
+            PageTests.printMessage(LogStatus.INFO, message);
             return element;
         } catch(NoSuchElementException e) {
-            PageTests.printMessage(LogStatus.WARNING, "Element not Found : " + locator);
+            String error = "Element not Found : " + locator;
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
         return null;
     }
@@ -193,9 +199,11 @@ public class Browser {
     public List<WebElement> getElements(By locator) {
         List<WebElement> elements = driver.findElements(locator);
         if(elements.size() > 0) {
-            PageTests.printMessage(LogStatus.INFO, "Elements Found : " + locator);
+            String message = "Elements Found : " + locator;
+            PageTests.printMessage(LogStatus.INFO, message);
         } else {
-            PageTests.printMessage(LogStatus.WARNING, "Elements not Found : " + locator);
+            String error = "Elements not Found : " + locator;
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
         return elements;
     }
@@ -205,7 +213,8 @@ public class Browser {
             WebElement element = driver.findElement(locator);
             return getSelect(element, locator);
         } catch(NoSuchElementException e) {
-            PageTests.printMessage(LogStatus.WARNING, "Element not Found : " + locator);
+            String error = "Element not Found : " + locator;
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
         return null;
     }
@@ -213,13 +222,16 @@ public class Browser {
         try {
             if(element != null) {
                 Select select = new Select(element);
-                PageTests.printMessage(LogStatus.INFO, "Select Found : " + locator);
+                String message = "Select Found : " + locator;
+                PageTests.printMessage(LogStatus.INFO, message);
                 return select;
             } else {
-                PageTests.printMessage(LogStatus.WARNING, "Select not Found : " + locator);
+                String error = "Select not Found : " + locator;
+                PageTests.printMessage(LogStatus.WARNING, error);
             }
         } catch(UnexpectedTagNameException e) {
-            PageTests.printMessage(LogStatus.WARNING, "Element is no a Select : " + locator);
+            String error = "Element is no a Select : " + locator;
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
         return null;
     }
@@ -227,42 +239,56 @@ public class Browser {
     public void inputText(By locator, String value, int miliseconds) {
         WebElement element = getElement(locator);
         if(isActive(element)) {
-            PageTests.printMessage(LogStatus.INFO, "Input Text : " + locator + " | '" + value + "'");
-            highlight(element, miliseconds).sendKeys(value);
+            if(value != null) {
+                String message = "Input Text : " + locator + " | Value ('" + value + "')";
+                PageTests.printMessage(LogStatus.INFO, message);
+                highlight(element, miliseconds).sendKeys(value);
+            }
         } else {
-            PageTests.printMessage(LogStatus.WARNING, "Couldn't be Input Text : " + locator + " | '" + value + "'");
+            String error = "Couldn't be Input Text : " + locator + " | '" + value + "'";
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
     }
 
     public void click(By locator, int miliseconds) {
         WebElement element = getElement(locator);
         if(isActive(element)) {
-            PageTests.printMessage(LogStatus.INFO, "Click : " + locator);
+            String message = "Click : " + locator;
+            PageTests.printMessage(LogStatus.INFO, message);
             highlight(element, miliseconds).click();
         } else {
-            PageTests.printMessage(LogStatus.WARNING, "Couldn't be Clicked : " + locator);
+            String error = "Couldn't be Clicked : " + locator;
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
     }
 
     public void selectByValue(By locator, String value, int miliseconds) {
         WebElement element = getElement(locator);
         if(isActive(element)) {
-            PageTests.printMessage(LogStatus.INFO, "Select by Value : " + locator + " | '" + value + "'");
-            highlight(element, miliseconds);
-            getSelect(element, locator).selectByValue(value);
+            if(value != null) {
+                String message = "Select by Value : " + locator + " | '" + value + "'";
+                PageTests.printMessage(LogStatus.INFO, message);
+                highlight(element, miliseconds);
+                getSelect(element, locator).selectByValue(value);
+            }
         } else {
-            PageTests.printMessage(LogStatus.WARNING, "Couldn't be selected by Value : " + locator + " | '" + value + "'");
+            String error = "Couldn't be selected by Value : " + locator + " | '" + value + "'";
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
     }
 
     public void selectByVisibleText(By locator, String value, int miliseconds) {
         WebElement element = getElement(locator);
         if(isActive(element)) {
-            PageTests.printMessage(LogStatus.INFO, "Select by Visible Text : " + locator + " | '" + value + "'");
-            highlight(element, miliseconds);
-            getSelect(element, locator).selectByVisibleText(value);
+            if(value != null) {
+                String message = "Select by Visible Text : " + locator + " | '" + value + "'";
+                PageTests.printMessage(LogStatus.INFO, message);
+                highlight(element, miliseconds);
+                getSelect(element, locator).selectByVisibleText(value);
+            }
         } else {
-            PageTests.printMessage(LogStatus.WARNING, "Couldn't be selected by Visible Text : " + locator + " | '" + value + "'");
+            String error = "Couldn't be selected by Visible Text : " + locator + " | '" + value + "'";
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
     }
 
@@ -284,9 +310,11 @@ public class Browser {
             TakesScreenshot scrShot = (TakesScreenshot) driver;
             File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(srcFile, dstFile);
-            PageTests.printMessage(LogStatus.INFO, "Snapshot taken : '" + dstFile + "'");
+            String message = "Snapshot taken : '" + dstFile + "'";
+            PageTests.printMessage(LogStatus.INFO, message);
         } catch(IOException e) {
-            PageTests.printMessage(LogStatus.WARNING, "Couldn't be taken the snapshoot : '" + dstFile + "'");
+            String error = "Couldn't be taken the snapshoot : '" + dstFile + "'";
+            PageTests.printMessage(LogStatus.WARNING, error);
         }
     }
 
