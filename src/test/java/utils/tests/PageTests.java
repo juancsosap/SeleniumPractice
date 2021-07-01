@@ -20,6 +20,7 @@ public abstract class PageTests<T extends Page> {
     protected T page;
     protected DataDriven dataDriven;
     protected DataStorage data;
+    protected String expected, error;
 
     protected static final int wait = 1000;
     protected static final String reportFolder = "target/reports/";
@@ -56,7 +57,7 @@ public abstract class PageTests<T extends Page> {
         printMessage(LogStatus.INFO, "Running : " + name);
         printMessage(LogStatus.INFO, "Calling Method : " + getMethodName(method));
 
-        page.go(1000);
+        page.go(wait);
     }
 
     @AfterMethod

@@ -17,23 +17,23 @@ public class HomePageTests extends PageTests<HomePage> {
 
     @Test
     public void elementsPresent() {
-        asserter.assertActive(HomePage.buttonSignin, "Button Signin", wait);
-        asserter.assertActive(HomePage.inputSearch, "Input Search", wait);
-        asserter.assertActive(HomePage.buttonSearch, "Button Search", wait);
+        asserter.assertActive(HomePage.buttonSignin, wait);
+        asserter.assertActive(HomePage.inputSearch, wait);
+        asserter.assertActive(HomePage.buttonSearch, wait);
     }
 
     @Test
     public void pressButtonSigninSuccess() {
         browser.click(HomePage.buttonSignin, wait);
-        asserter.assertText(SigninPage.textHeading, "Authentication", "Signin Page not displayed", wait);
+        asserter.assertText(SigninPage.textHeading, data.get(1), data.get(2), wait);
     }
 
     @Test
     public void searchSuccess() {
         page.searchProduct(data.get(1), wait);
 
-        asserter.assertText(ResultPage.textHeading, "Search", "Result Page not displayed", wait);
-        asserter.assertListSize(ResultPage.produstResults, 1, "No Result displayed");
+        asserter.assertText(ResultPage.textHeading, data.get(2), data.get(3), wait);
+        asserter.assertListSize(ResultPage.produstResults, data.getInt(4), data.get(5));
     }
 
 }

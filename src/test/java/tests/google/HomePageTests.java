@@ -15,18 +15,18 @@ public class HomePageTests extends PageTests<HomePage> {
 
     @Test
     public void inputSearchPresent() {
-        asserter.assertActive(HomePage.inputQuery, "Search Input", wait);
+        asserter.assertActive(HomePage.inputQuery, wait);
     }
 
     @Test
     public void buttonSearchPresent() {
-        asserter.assertActive(HomePage.buttonSearch, "Search Button", wait);
+        asserter.assertActive(HomePage.buttonSearch, wait);
     }
 
     @Test
     public void completeSearchSuccess() {
         page.searchText(data.get(1), wait);
-        asserter.assertListSize(ResultPage.results, 1, "No Result Elements displayed");
+        asserter.assertListSize(ResultPage.results, data.getInt(2), data.get(3));
     }
 
 }

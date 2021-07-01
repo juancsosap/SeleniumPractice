@@ -1,6 +1,8 @@
 package pom.automationpractice;
 
 import org.openqa.selenium.By;
+import pom.automationpractice.data.RegisterBuilder;
+import pom.automationpractice.data.RegisterData;
 import utils.pom.Page;
 import utils.web.Browser;
 import utils.RandomGen;
@@ -49,79 +51,24 @@ public class RegisterPage extends Page {
         return "prueba" + RandomGen.getDigits(5) + "@prueba.prueba";
     }
 
-    public void selectBirth(int day, int month, int year, int miliseconds) {
-        browser.selectByValue(RegisterPage.selectBirthDay, day + "", miliseconds);
-        browser.selectByValue(RegisterPage.selectBirthMonth, month + "", miliseconds);
-        browser.selectByValue(RegisterPage.selectBirthYear, year + "", miliseconds);
-    }
-
     public void selectTitle(String value, int miliseconds) {
-        if(value.equalsIgnoreCase("mr")) browser.click(RegisterPage.radioTitleMr, miliseconds);
-        if(value.equalsIgnoreCase("mrs")) browser.click(RegisterPage.radioTitleMrs, miliseconds);
+        if(value != null) {
+            if (value.equalsIgnoreCase("mr")) browser.click(RegisterPage.radioTitleMr, miliseconds);
+            if (value.equalsIgnoreCase("mrs")) browser.click(RegisterPage.radioTitleMrs, miliseconds);
+        }
     }
 
-    public Builder fillForm() { return new Builder(this); }
+    public RegisterBuilder fillForm() { return new RegisterBuilder(this); }
 
-    private class Data {
-
-        public Data() {
-            title = "Mr"; firstname = ""; lastname = ""; password = "";
-            dayBirth = 1; monthBirth = 1; yearBirth = 2020; company = ""; address = ""; city = "";
-            state = "-"; postCode = "00000"; country = "United States"; additional = "";
-            homePhone = ""; mobilePhone = ""; alias = "";
-        }
-
-        private String title;
-        private String firstname;
-        private String lastname;
-        private String password;
-        private int dayBirth, monthBirth, yearBirth;
-        private String company;
-        private String address;
-        private String city;
-        private String state;
-        private String postCode;
-        private String country;
-        private String additional;
-        private String homePhone;
-        private String mobilePhone;
-        private String alias;
-
-    }
-
-    public class Builder {
-
-        private Data data;
-        private RegisterPage page;
-
-        public Builder(RegisterPage page) {
-            this.data = new Data();
-            this.page = page;
-        }
-
-        public Builder title(String value) { data.title = value; return this; }
-        public Builder firstname(String value) { data.firstname = value; return this; }
-        public Builder lastname(String value) { data.lastname = value; return this; }
-        public Builder password(String value) { data.password = value; return this; }
-        public Builder birth(int day, int month, int year) {
-            data.dayBirth = day; data.monthBirth = month; data.yearBirth = year; return this; }
-        public Builder company(String value) { data.company = value; return this; }
-        public Builder address(String value) { data.address = value; return this; }
-        public Builder city(String value) { data.city = value; return this; }
-        public Builder state(String value) { data.state = value; return this; }
-        public Builder postCode(String value) { data.postCode = value; return this; }
-        public Builder country(String value) { data.country = value; return this; }
-        public Builder additional(String value) { data.additional = value; return this; }
-        public Builder homePhone(String value) { data.homePhone = value; return this; }
-        public Builder mobilePhone(String value) { data.mobilePhone = value; return this; }
-        public Builder alias(String value) { data.alias = value; return this; }
-
-        public void register(int miliseconds) {
-            page.selectTitle(data.title, miliseconds);
+    public void register(RegisterData data, int miliseconds) {
+        if(data != null) {
+            selectTitle(data.title, miliseconds);
             browser.inputText(RegisterPage.inputFirstname, data.firstname, miliseconds);
             browser.inputText(RegisterPage.inputLastname, data.lastname, miliseconds);
             browser.inputText(RegisterPage.inputPassword, data.password, miliseconds);
-            page.selectBirth(miliseconds, data.dayBirth, data.monthBirth, data.yearBirth);
+            browser.selectByValue(RegisterPage.selectBirthDay, data.dayBirth, miliseconds);
+            browser.selectByValue(RegisterPage.selectBirthMonth, data.monthBirth, miliseconds);
+            browser.selectByValue(RegisterPage.selectBirthYear, data.yearBirth, miliseconds);
             browser.inputText(RegisterPage.inputCompany, data.company, miliseconds);
             browser.inputText(RegisterPage.inputAddress, data.address, miliseconds);
             browser.inputText(RegisterPage.inputCity, data.city, miliseconds);
@@ -132,9 +79,8 @@ public class RegisterPage extends Page {
             browser.inputText(RegisterPage.inputHomePhone, data.homePhone, miliseconds);
             browser.inputText(RegisterPage.inputMobilePhone, data.mobilePhone, miliseconds);
             browser.inputText(RegisterPage.inputAlias, data.alias, miliseconds);
-
-            browser.click(RegisterPage.buttonRegister, miliseconds);
         }
+        browser.click(RegisterPage.buttonRegister, miliseconds);
     }
 
 }

@@ -18,11 +18,12 @@ public class Asserter {
     }
 
     public void assertTrue(String test, boolean result, String error, By locator) throws Error {
+        String message = "Assert : " + locator + " | " + test;
         try {
             Assert.assertTrue(result, error);
-            PageTests.printMessage(LogStatus.PASS, "Assert : " + locator + " | " + test);
+            PageTests.printMessage(LogStatus.PASS, message);
         } catch(Error e) {
-            PageTests.printMessage(LogStatus.FAIL, "Assert : " + locator + " | " + test);
+            PageTests.printMessage(LogStatus.FAIL, message);
             throw e;
         }
     }
@@ -30,43 +31,51 @@ public class Asserter {
     public void assertText(By locator, String text, String error, int miliseconds) throws Error {
         WebElement element = browser.highlight(locator, miliseconds);
 
-        if(element != null) {
-            assertTrue("Text Equal ('" + text + "')", element.getText().equalsIgnoreCase(text), error, locator);
-        } else {
-            assertTrue("Text Equal ('" + text + "')", false, error, locator);
-        }
+        String testDesc = "Text Contains ('" + text + "')";
+        boolean result = element != null && element.getText().contains(text);
+        assertTrue(testDesc, result, error, locator);
     }
 
-    public void assertActive(By locator, String name, int miliseconds) throws Error {
+    public void assertActive(By locator, int miliseconds) throws Error {
         WebElement element = browser.highlight(locator, miliseconds);
 
-        if(element != null) {
-            assertTrue("Enabled", element.isEnabled(), name + " not enabled", locator);
-        } else {
-            assertTrue("Enabled", false, name + " not enabled", locator);
-        }
+        String testDesc = "Enabled";
+        boolean result = element != null && element.isEnabled();
+        assertTrue(testDesc, result, "Not enabled", locator);
     }
 
     public void assertListSize(By locator, int size, String error) throws Error {
         List<WebElement> elements = browser.getElements(locator);
-        assertTrue("List Size (" + elements.size() + " >= " + size + ")", elements.size() >= size, error, locator);
+
+        String testDesc = "List Size must be >= " + size + " and is " + elements.size();
+        boolean result = elements.size() >= size;
+        assertTrue(testDesc, result, error, locator);
     }
 
     public void assertListContains(By locator, String text, String error) throws Error {
         List<WebElement> elements = browser.getElements(locator);
         List<String> elementsText = elements.stream().map(WebElement::getText).collect(Collectors.toList());
-        assertTrue("List Contains ('" + text + "')", elementsText.contains(text), error, locator);
+
+        String testDesc = "List Contains ('" + text + "')";
+        boolean result = elementsText.stream().anyMatch(e -> e.contains(text));
+        assertTrue(testDesc, result, error, locator);
     }
 
     public void assertSelectSize(By locator, int size, String error) throws Error {
         List<WebElement> elements = browser.getSelect(locator).getOptions();
-        assertTrue("Select Size (" + elements.size() + " >= " + size + ")", elements.size() >= size, error, locator);
+
+        String testDesc = "Select Size (" + elements.size() + " >= " + size + ")";
+        boolean result = elements.size() >= size;
+        assertTrue(testDesc, result, error, locator);
     }
 
     public void assertSelectContains(By locator, String attribute, String value, String error) throws Error {
         List<WebElement> elements = browser.getSelect(locator).getOptions();
         List<String> elementsText = elements.stream().map(we -> we.getAttribute(attribute)).collect(Collectors.toList());
-        assertTrue("Select Contains ('" + value + "')", elementsText.contains(value), error, locator);
+
+        String testDesc = "Select Contains ('" + value + "')";
+        boolean result = elementsText.contains(value);
+        assertTrue(testDesc, result, error, locator);
     }
 
 }

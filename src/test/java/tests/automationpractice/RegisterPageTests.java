@@ -16,75 +16,75 @@ public class RegisterPageTests extends PageTests<RegisterPage> {
 
     @Test
     public void elementsPresent() {
-        asserter.assertActive(RegisterPage.radioTitleMr, "Radio Input Mr Title", wait);
-        asserter.assertActive(RegisterPage.radioTitleMrs, "Radio Input Mrs Title", wait);
+        asserter.assertActive(RegisterPage.radioTitleMr, wait);
+        asserter.assertActive(RegisterPage.radioTitleMrs, wait);
 
-        asserter.assertActive(RegisterPage.inputFirstname, "Input Firstname", wait);
-        asserter.assertActive(RegisterPage.inputLastname, "Input Lastname", wait);
-        asserter.assertActive(RegisterPage.inputEmail, "Input Email", wait);
-        asserter.assertActive(RegisterPage.inputPassword, "Input Password", wait);
+        asserter.assertActive(RegisterPage.inputFirstname, wait);
+        asserter.assertActive(RegisterPage.inputLastname, wait);
+        asserter.assertActive(RegisterPage.inputEmail, wait);
+        asserter.assertActive(RegisterPage.inputPassword, wait);
 
-        asserter.assertActive(RegisterPage.selectBirthDay, "Select Day Birth", wait);
-        asserter.assertSelectSize(RegisterPage.selectBirthDay, 31, "Select Day Birth no fill");
-        asserter.assertActive(RegisterPage.selectBirthMonth, "Select Month Birth", wait);
-        asserter.assertSelectSize(RegisterPage.selectBirthMonth, 12, "Select Month Birth no fill");
-        asserter.assertActive(RegisterPage.selectBirthYear, "Select Year Birth", wait);
-        asserter.assertSelectSize(RegisterPage.selectBirthYear, 20, "Select Year Birth no fill");
+        asserter.assertActive(RegisterPage.selectBirthDay, wait);
+        asserter.assertSelectSize(RegisterPage.selectBirthDay, data.getInt(1), data.get(2));
+        asserter.assertActive(RegisterPage.selectBirthMonth, wait);
+        asserter.assertSelectSize(RegisterPage.selectBirthMonth, data.getInt(3), data.get(4));
+        asserter.assertActive(RegisterPage.selectBirthYear, wait);
+        asserter.assertSelectSize(RegisterPage.selectBirthYear, data.getInt(5), data.get(6));
 
-        asserter.assertActive(RegisterPage.inputCompany, "Input Company", wait);
-        asserter.assertActive(RegisterPage.inputAddress, "Input Address", wait);
-        asserter.assertActive(RegisterPage.inputCity, "Input City", wait);
-        asserter.assertActive(RegisterPage.selectState, "Select State", wait);
-        asserter.assertSelectSize(RegisterPage.selectState, 50, "Select State no fill");
-        asserter.assertActive(RegisterPage.inputPostCode, "Input PostCode", wait);
-        asserter.assertActive(RegisterPage.selectCountry, "Select Country", wait);
-        asserter.assertSelectSize(RegisterPage.selectCountry, 1, "Select Country no fill");
-        asserter.assertActive(RegisterPage.inputAdditional, "Input Additional", wait);
-        asserter.assertActive(RegisterPage.inputHomePhone, "Input Home Phone", wait);
-        asserter.assertActive(RegisterPage.inputMobilePhone, "Input Mobile Phone", wait);
-        asserter.assertActive(RegisterPage.inputAlias, "Input Alias", wait);
+        asserter.assertActive(RegisterPage.inputCompany, wait);
+        asserter.assertActive(RegisterPage.inputAddress, wait);
+        asserter.assertActive(RegisterPage.inputCity, wait);
+        asserter.assertActive(RegisterPage.selectState, wait);
+        asserter.assertSelectSize(RegisterPage.selectState, data.getInt(7), data.get(8));
+        asserter.assertActive(RegisterPage.inputPostCode, wait);
+        asserter.assertActive(RegisterPage.selectCountry, wait);
+        asserter.assertSelectSize(RegisterPage.selectCountry, data.getInt(9), data.get(10));
+        asserter.assertActive(RegisterPage.inputAdditional, wait);
+        asserter.assertActive(RegisterPage.inputHomePhone, wait);
+        asserter.assertActive(RegisterPage.inputMobilePhone, wait);
+        asserter.assertActive(RegisterPage.inputAlias, wait);
 
-        asserter.assertActive(RegisterPage.buttonRegister, "Button Register", wait);
+        asserter.assertActive(RegisterPage.buttonRegister, wait);
     }
 
     @Test
-    public void registerWithFieldEmpty() {
-        page.fillForm().register(wait);
+    public void registerWithEmptyField() {
+        page.register(null, wait);
 
-        asserter.assertListSize(RegisterPage.errorMessages, 6, "No error generated with empty fields");
-        asserter.assertListContains(RegisterPage.errorMessages, "firstname is required.", "firstname field no required");
-        asserter.assertListContains(RegisterPage.errorMessages, "lastname is required.", "lastname field no required");
-        asserter.assertListContains(RegisterPage.errorMessages, "passwd is required.", "password field no required");
-        asserter.assertListContains(RegisterPage.errorMessages, "address1 is required.", "address field no required");
-        asserter.assertListContains(RegisterPage.errorMessages, "city is required.", "city field no required");
-        asserter.assertListContains(RegisterPage.errorMessages, "This country requires you to choose a State.", "state field no required");
-        asserter.assertListContains(RegisterPage.errorMessages, "You must register at least one phone number.", "no phone number required");
+        asserter.assertListSize(RegisterPage.errorMessages, data.getInt(1), data.get(2));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(3), data.get(4));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(5), data.get(6));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(7), data.get(8));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(9), data.get(10));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(11), data.get(12));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(13), data.get(14));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(15), data.get(16));
     }
 
     @Test
-    public void registerWithInvalidFieldValue() {
+    public void registerWithInvalidField() {
         page.fillForm().firstname(data.get(1)).lastname(data.get(2)).password(data.get(3))
-                       .birth(data.getInt(4), data.getInt(5), data.getInt(6))
-                       .postCode(data.get(7)).register(1000);
+                       .birthDay(data.get(4)).birthMonth(data.get(5)).birthYear(data.get(6))
+                       .postCode(data.get(7)).register(wait);
         browser.wait(wait);
 
-        asserter.assertListSize(RegisterPage.errorMessages, 1, "No error generated with wrong email");
-        asserter.assertListContains(RegisterPage.errorMessages, "firstname is invalid.", "firstname field format not validated");
-        asserter.assertListContains(RegisterPage.errorMessages, "lastname is invalid.", "lastname field format not validated");
-        asserter.assertListContains(RegisterPage.errorMessages, "passwd is invalid.", "password field format not validated");
-        asserter.assertListContains(RegisterPage.errorMessages, "Invalid date of birth", "birthday date not validated");
-        asserter.assertListContains(RegisterPage.errorMessages, "The Zip/Postal code you've entered is invalid. It must follow this format: 00000", "birthday date not validated");
+        asserter.assertListSize(RegisterPage.errorMessages, data.getInt(8), data.get(9));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(10), data.get(11));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(12), data.get(13));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(14), data.get(15));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(16), data.get(17));
+        asserter.assertListContains(RegisterPage.errorMessages, data.get(18), data.get(19));
     }
 
     @Test
-    public void registerWithValidFieldValue() {
+    public void registerWithValidField() {
         page.fillForm().title(data.get(1)).firstname(data.get(2)).lastname(data.get(3)).password(data.get(4))
-                .birth(data.getInt(5), data.getInt(6), data.getInt(7)).company(data.get(8))
+                .birthDay(data.get(5)).birthMonth(data.get(6)).birthYear(data.get(7)).company(data.get(8))
                 .address(data.get(9)).city(data.get(10)).state(data.get(11)).postCode(data.get(12))
                 .country(data.get(13)).additional(data.get(14)).homePhone(data.get(15))
                 .mobilePhone(data.get(16)).alias(data.get(17)).register(wait);
 
-        asserter.assertActive(HomePage.buttonLogout, "Logout Button",  wait);
+        asserter.assertActive(HomePage.buttonLogout, wait);
 
         browser.click(HomePage.buttonLogout, wait);
     }
