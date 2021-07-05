@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pom.automationpractice.HomePage;
 import pom.automationpractice.RegisterPage;
-import utils.tests.PageTests;
+import tests.PageTests;
 
 public class RegisterPageTests extends PageTests<RegisterPage> {
 

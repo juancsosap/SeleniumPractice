@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Test Suite Cucumber" verbose="1" >
+
+    <test name="Google Tests">
+        <classes>
+            <class name="steps.TestRunner"/>
+        </classes>
+    </test>
+
+</suite>

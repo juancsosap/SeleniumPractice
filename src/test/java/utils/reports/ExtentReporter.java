@@ -20,7 +20,8 @@ public class ExtentReporter extends Reporter {
     }
 
     public void log(LogStatus status, String details) {
-        test.log(status.get(), details);
+        System.out.println(status + " : " + details);
+        test.log(status.get(), details + "<br>");
     }
 
     public void commit() {

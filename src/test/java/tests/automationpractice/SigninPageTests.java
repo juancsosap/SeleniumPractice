@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pom.automationpractice.RegisterPage;
 import pom.automationpractice.SigninPage;
-import utils.tests.PageTests;
+import tests.PageTests;
 
 public class SigninPageTests extends PageTests<SigninPage> {
 
@@ -48,7 +48,7 @@ public class SigninPageTests extends PageTests<SigninPage> {
     public void createAccountWithRightEmail() {
         page.createAccount(data.get(1), wait);
 
-        asserter.assertText(RegisterPage.textHeading, data.get(2), data.get(3), wait);
+        asserter.assertActive(RegisterPage.inputFirstname, wait);
     }
 
 }

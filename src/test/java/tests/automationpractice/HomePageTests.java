@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import pom.automationpractice.ResultPage;
 import pom.automationpractice.HomePage;
 import pom.automationpractice.SigninPage;
-import utils.tests.PageTests;
+import tests.PageTests;
 
 public class HomePageTests extends PageTests<HomePage> {
 

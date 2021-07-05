@@ -22,9 +22,8 @@ public class DataDriven {
     }
 
     private XSSFSheet getSheet() {
-        try {
-            FileInputStream file = new FileInputStream(filePath);
-            XSSFWorkbook excel = new XSSFWorkbook(file);
+        try(FileInputStream file = new FileInputStream(filePath);
+            XSSFWorkbook excel = new XSSFWorkbook(file)) {
             return excel.getSheet(sheetName);
         } catch(IOException e) {
             e.printStackTrace();
@@ -36,17 +35,19 @@ public class DataDriven {
         ArrayList<String> data = new ArrayList<>();
 
         XSSFSheet sheet = getSheet();
-        for(Row row : sheet) {
-            for(Cell cell : row) {
-                if(cell.getColumnIndex() == 0) {
-                    if(!cell.toString().equalsIgnoreCase(className)) break;
-                } else if(cell.getColumnIndex() == 1) {
-                    if(!cell.toString().equalsIgnoreCase(tag)) break;
-                } else {
-                    data.add(cell + "");
+        if(sheet != null) {
+            for (Row row : sheet) {
+                for (Cell cell : row) {
+                    if (cell.getColumnIndex() == 0) {
+                        if (!cell.toString().equalsIgnoreCase(className)) break;
+                    } else if (cell.getColumnIndex() == 1) {
+                        if (!cell.toString().equalsIgnoreCase(tag)) break;
+                    } else {
+                        data.add(cell + "");
+                    }
                 }
+                if (data.size() > 0) return new DataStorage(data);
             }
-            if(data.size() > 0) return new DataStorage(data);
         }
 
         return null;

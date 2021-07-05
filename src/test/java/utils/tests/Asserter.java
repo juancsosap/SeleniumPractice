@@ -3,6 +3,7 @@ package utils.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import tests.PageTests;
 import utils.reports.LogStatus;
 import utils.web.Browser;
 
@@ -21,9 +22,9 @@ public class Asserter {
         String message = "Assert : " + locator + " | " + test;
         try {
             Assert.assertTrue(result, error);
-            PageTests.printMessage(LogStatus.PASS, message);
+            browser.reporter.log(LogStatus.PASS, message);
         } catch(Error e) {
-            PageTests.printMessage(LogStatus.FAIL, message);
+            browser.reporter.log(LogStatus.FAIL, message);
             throw e;
         }
     }

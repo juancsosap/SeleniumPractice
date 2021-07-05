@@ -19,22 +19,25 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.reports.LogStatus;
-import utils.tests.PageTests;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
+import utils.reports.Reporter;
+
 import java.util.concurrent.TimeUnit;
 
 public class Browser {
     protected WebDriver driver;
     protected BrowserSelector selector;
     protected Object options;
+    public Reporter reporter;
 
-    public Browser(BrowserSelector selector, String driverPath, int waitSeconds, boolean privateMode) {
+    public Browser(BrowserSelector selector, String driverPath, Reporter reporter, int waitSeconds, boolean privateMode) {
         this.selector = selector;
+        this.reporter = reporter;
         setPath(driverPath);
         setOptions(privateMode);
         setDriver();
@@ -42,11 +45,11 @@ public class Browser {
 
         driver.manage().window().maximize();
     }
-    public Browser(BrowserSelector selector, String driverPath) {
-        this(selector, driverPath, 10, false);
+    public Browser(BrowserSelector selector, Reporter reporter, String driverPath) {
+        this(selector, driverPath, reporter, 10, false);
     }
-    public Browser(BrowserSelector selector, String driverPath, int waitSeconds) {
-        this(selector, driverPath, waitSeconds, false);
+    public Browser(BrowserSelector selector, String driverPath, Reporter reporter, int waitSeconds) {
+        this(selector, driverPath, reporter, waitSeconds, false);
     }
 
     public void setOptions(boolean privateMode) {
@@ -187,11 +190,11 @@ public class Browser {
         try {
             WebElement element = driver.findElement(locator);
             String message = "Element Found : " + locator;
-            PageTests.printMessage(LogStatus.INFO, message);
+            reporter.log(LogStatus.INFO, message);
             return element;
         } catch(NoSuchElementException e) {
             String error = "Element not Found : " + locator;
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
         return null;
     }
@@ -200,10 +203,10 @@ public class Browser {
         List<WebElement> elements = driver.findElements(locator);
         if(elements.size() > 0) {
             String message = "Elements Found : " + locator;
-            PageTests.printMessage(LogStatus.INFO, message);
+            reporter.log(LogStatus.INFO, message);
         } else {
             String error = "Elements not Found : " + locator;
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
         return elements;
     }
@@ -214,7 +217,7 @@ public class Browser {
             return getSelect(element, locator);
         } catch(NoSuchElementException e) {
             String error = "Element not Found : " + locator;
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
         return null;
     }
@@ -223,15 +226,15 @@ public class Browser {
             if(element != null) {
                 Select select = new Select(element);
                 String message = "Select Found : " + locator;
-                PageTests.printMessage(LogStatus.INFO, message);
+                reporter.log(LogStatus.INFO, message);
                 return select;
             } else {
                 String error = "Select not Found : " + locator;
-                PageTests.printMessage(LogStatus.WARNING, error);
+                reporter.log(LogStatus.WARNING, error);
             }
         } catch(UnexpectedTagNameException e) {
             String error = "Element is no a Select : " + locator;
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
         return null;
     }
@@ -241,12 +244,12 @@ public class Browser {
         if(isActive(element)) {
             if(value != null) {
                 String message = "Input Text : " + locator + " | Value ('" + value + "')";
-                PageTests.printMessage(LogStatus.INFO, message);
+                reporter.log(LogStatus.INFO, message);
                 highlight(element, miliseconds).sendKeys(value);
             }
         } else {
             String error = "Couldn't be Input Text : " + locator + " | '" + value + "'";
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
     }
 
@@ -254,11 +257,11 @@ public class Browser {
         WebElement element = getElement(locator);
         if(isActive(element)) {
             String message = "Click : " + locator;
-            PageTests.printMessage(LogStatus.INFO, message);
+            reporter.log(LogStatus.INFO, message);
             highlight(element, miliseconds).click();
         } else {
             String error = "Couldn't be Clicked : " + locator;
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
     }
 
@@ -267,13 +270,13 @@ public class Browser {
         if(isActive(element)) {
             if(value != null) {
                 String message = "Select by Value : " + locator + " | '" + value + "'";
-                PageTests.printMessage(LogStatus.INFO, message);
+                reporter.log(LogStatus.INFO, message);
                 highlight(element, miliseconds);
                 getSelect(element, locator).selectByValue(value);
             }
         } else {
             String error = "Couldn't be selected by Value : " + locator + " | '" + value + "'";
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
     }
 
@@ -282,13 +285,13 @@ public class Browser {
         if(isActive(element)) {
             if(value != null) {
                 String message = "Select by Visible Text : " + locator + " | '" + value + "'";
-                PageTests.printMessage(LogStatus.INFO, message);
+                reporter.log(LogStatus.INFO, message);
                 highlight(element, miliseconds);
                 getSelect(element, locator).selectByVisibleText(value);
             }
         } else {
             String error = "Couldn't be selected by Visible Text : " + locator + " | '" + value + "'";
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
     }
 
@@ -311,10 +314,10 @@ public class Browser {
             File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(srcFile, dstFile);
             String message = "Snapshot taken : '" + dstFile + "'";
-            PageTests.printMessage(LogStatus.INFO, message);
+            reporter.log(LogStatus.INFO, message);
         } catch(IOException e) {
             String error = "Couldn't be taken the snapshoot : '" + dstFile + "'";
-            PageTests.printMessage(LogStatus.WARNING, error);
+            reporter.log(LogStatus.WARNING, error);
         }
     }
 

@@ -1,0 +1,1109 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 21178444900,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Home Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Home Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 17657212300,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Home Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:21:13.209Z",
+        "line": 7,
+        "name": "Test Elements on Home Page",
+        "description": "",
+        "id": "automation-practice-home-page-tests;test-elements-on-home-page",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 6885626700,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "Search Product input and button elements are present",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.elementsPresent()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1092361700,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "Signin button element is present",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.signinButtonPresent()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2440963000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 10730997600,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Home Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Home Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 13138835400,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Home Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:22:02.616Z",
+        "line": 19,
+        "name": "Test Searching on Home Page",
+        "description": "",
+        "id": "automation-practice-home-page-tests;test-searching-on-home-page;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 10528666500,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "The value blouse is typed and searched a Product",
+            "match": {
+              "arguments": [
+                {
+                  "val": "blouse",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.automationpractice.HomePageSteps.searchValue(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 72771500,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Result page is shown with the products",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.resultPageShown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 149351700,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 6294217400,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Home Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Home Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 13913598700,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Home Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:22:37.247Z",
+        "line": 20,
+        "name": "Test Searching on Home Page",
+        "description": "",
+        "id": "automation-practice-home-page-tests;test-searching-on-home-page;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 11069102700,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "The value dress is typed and searched a Product",
+            "match": {
+              "arguments": [
+                {
+                  "val": "dress",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.automationpractice.HomePageSteps.searchValue(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 87276000,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Result page is shown with the products",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.resultPageShown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 656113400,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 9023543100,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Home Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Home Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 14921349700,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Home Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:23:09.283Z",
+        "line": 22,
+        "name": "Test Signin Button in Home Page",
+        "description": "",
+        "id": "automation-practice-home-page-tests;test-signin-button-in-home-page",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 8120313600,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "Click the Signin button element",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.clickSigninButton()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1095207000,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "Signin page is shown",
+            "match": {
+              "location": "steps.automationpractice.HomePageSteps.signinPageShown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 369790800,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Automation Practice Home Page Tests",
+    "description": "",
+    "id": "automation-practice-home-page-tests",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/automationpractice/HomePage.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 7408695200,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Signin Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Signin Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 17761545200,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Signin Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.SigninPageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:23:42.831Z",
+        "line": 7,
+        "name": "Test Elements on Signin Page",
+        "description": "",
+        "id": "automation-practice-signin-page-tests;test-elements-on-signin-page",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2151521500,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "Email input and register button elements are present",
+            "match": {
+              "location": "steps.automationpractice.SigninPageSteps.elementsPresent()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 96504900,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 9184646400,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Signin Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Signin Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 21657449100,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Signin Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.SigninPageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:24:10.262Z",
+        "line": 18,
+        "name": "Test Register on Signin Page",
+        "description": "",
+        "id": "automation-practice-signin-page-tests;test-register-on-signin-page;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 3303971000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "The email  is typed and try to register",
+            "match": {
+              "arguments": [
+                {
+                  "val": "",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.automationpractice.SigninPageSteps.registerEmail(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2740515300,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "Invalid email address Error is received",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Invalid email address",
+                  "offset": 0
+                }
+              ],
+              "location": "steps.automationpractice.SigninPageSteps.errorReceived(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 162903500,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 5239888700,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Signin Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Signin Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 21009012800,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Signin Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.SigninPageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:24:47.322Z",
+        "line": 19,
+        "name": "Test Register on Signin Page",
+        "description": "",
+        "id": "automation-practice-signin-page-tests;test-register-on-signin-page;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 3760868500,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "The email prueba@@prueba.prueba is typed and try to register",
+            "match": {
+              "arguments": [
+                {
+                  "val": "prueba@@prueba.prueba",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.automationpractice.SigninPageSteps.registerEmail(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4231960400,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "Invalid email address Error is received",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Invalid email address",
+                  "offset": 0
+                }
+              ],
+              "location": "steps.automationpractice.SigninPageSteps.errorReceived(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 199378900,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 6250523900,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Signin Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Signin Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 21822366000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Signin Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.SigninPageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:25:21.784Z",
+        "line": 20,
+        "name": "Test Register on Signin Page",
+        "description": "",
+        "id": "automation-practice-signin-page-tests;test-register-on-signin-page;;4",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 3670645500,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "The email prueba@prueba.com is typed and try to register",
+            "match": {
+              "arguments": [
+                {
+                  "val": "prueba@prueba.com",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.automationpractice.SigninPageSteps.registerEmail(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4412629200,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "email address has already been registered Error is received",
+            "match": {
+              "arguments": [
+                {
+                  "val": "email address has already been registered",
+                  "offset": 0
+                }
+              ],
+              "location": "steps.automationpractice.SigninPageSteps.errorReceived(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 169143400,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 5916852700,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Automation Practice Signin Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Automation Practice Signin Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 25611237900,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Automation Practice Signin Page is Launch",
+            "match": {
+              "location": "steps.automationpractice.SigninPageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:25:58.117Z",
+        "line": 29,
+        "name": "Test Register on Signin Page",
+        "description": "",
+        "id": "automation-practice-signin-page-tests;test-register-on-signin-page;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 3373190100,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "The email prueba@prueba.prueba is typed and try to register",
+            "match": {
+              "arguments": [
+                {
+                  "val": "prueba@prueba.prueba",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.automationpractice.SigninPageSteps.registerEmail(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 3894684200,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "Register page is shown",
+            "match": {
+              "location": "steps.automationpractice.SigninPageSteps.registerPageShown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 180308200,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Automation Practice Signin Page Tests",
+    "description": "",
+    "id": "automation-practice-signin-page-tests",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/automationpractice/SigninPage.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 5811531800,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Google Home Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Google Home Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4704015500,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Google Home Page is Launch",
+            "match": {
+              "location": "steps.google.HomePageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:26:37.101Z",
+        "line": 7,
+        "name": "Test Elements on Home Page",
+        "description": "",
+        "id": "google-home-page-tests;test-elements-on-home-page",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2195460800,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "Search input and button elements are present",
+            "match": {
+              "location": "steps.google.HomePageSteps.elementsPresent()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 270471800,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2815763600,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Google Home Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Google Home Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 3129650400,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Google Home Page is Launch",
+            "match": {
+              "location": "steps.google.HomePageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:26:50.090Z",
+        "line": 18,
+        "name": "Test Searching on Home Page",
+        "description": "",
+        "id": "google-home-page-tests;test-searching-on-home-page;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 6826939600,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "The value testing is typed and searched",
+            "match": {
+              "arguments": [
+                {
+                  "val": "testing",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.google.HomePageSteps.searchValue(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 47920500,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "Result page is shown",
+            "match": {
+              "location": "steps.google.HomePageSteps.resultPageShown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 4221810900,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "Open Home Page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2423029800,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Web Browser is Open for test \"Google Home Page Tests\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Google Home Page Tests",
+                  "offset": 30
+                }
+              ],
+              "location": "steps.BasicPageSteps.openBrowser(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 3358949800,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Google Home Page is Launch",
+            "match": {
+              "location": "steps.google.HomePageSteps.launchPage()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-07-05T05:27:07.140Z",
+        "line": 19,
+        "name": "Test Searching on Home Page",
+        "description": "",
+        "id": "google-home-page-tests;test-searching-on-home-page;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 5808523800,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "The value cucumber is typed and searched",
+            "match": {
+              "arguments": [
+                {
+                  "val": "cucumber",
+                  "offset": 10
+                }
+              ],
+              "location": "steps.google.HomePageSteps.searchValue(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 18996500,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "Result page is shown",
+            "match": {
+              "location": "steps.google.HomePageSteps.resultPageShown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 4226320200,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Close the browser",
+            "match": {
+              "location": "steps.BasicPageSteps.closeBrowser()"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Google Home Page Tests",
+    "description": "",
+    "id": "google-home-page-tests",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/google/HomePage.feature",
+    "tags": []
+  }
+]

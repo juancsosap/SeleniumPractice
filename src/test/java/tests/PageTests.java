@@ -1,4 +1,4 @@
-package utils.tests;
+package tests;
 
 import org.testng.annotations.*;
 import utils.data.DataDriven;
@@ -7,6 +7,7 @@ import utils.pom.Page;
 import utils.reports.ExtentReporter;
 import utils.reports.LogStatus;
 import utils.reports.Reporter;
+import utils.tests.Asserter;
 import utils.web.Browser;
 import utils.web.BrowserSelector;
 
@@ -36,7 +37,7 @@ public abstract class PageTests<T extends Page> {
     @BeforeClass
     public void beforeClass() {
         String driverPath = path(resourceFolder + "webdriver", "chromedriver", "exe");
-        browser = new Browser(BrowserSelector.CHROME, driverPath, 20);
+        browser = new Browser(BrowserSelector.CHROME, driverPath, reporter, 20);
         asserter = new Asserter(browser);
 
         String filePath = path(resourceFolder + "data", "tests", "xlsx");

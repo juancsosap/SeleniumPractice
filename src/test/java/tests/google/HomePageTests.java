@@ -3,7 +3,7 @@ package tests.google;
 import org.testng.annotations.*;
 import pom.google.HomePage;
 import pom.google.ResultPage;
-import utils.tests.PageTests;
+import tests.PageTests;
 
 public class HomePageTests extends PageTests<HomePage> {
 
